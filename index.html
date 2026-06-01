@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>马浩然 Frank — 个人主页</title>
+<meta name="description" content="马浩然 Frank · 数据分析 / AI 方向 · 把复杂问题拆到底层机制，再重建成能用的框架" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<style>
+  :root {
+    --bg: #fdfcfa; --paper: #ffffff; --text: #1c1b19; --text-soft: #46433d; --muted: #6f6b62;
+    --faint: #9a958b; --line: #ece9e3; --line-soft: #f2efe9; --hover: #f6f4f0; --active: #efece6;
+    --accent: #cc785c; --accent-deep: #b15c3d; --accent-wash: #fbf5f1; --code-bg: #f5f3ef;
+    --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --side-w: 250px; --top-h: 64px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 16px; line-height: 1.72; letter-spacing: .005em;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: inherit; }
+  ::selection { background: #f3d9cd; }
+
+  /* top bar */
+  .topbar { position: sticky; top: 0; z-index: 50; height: var(--top-h);
+    display: flex; align-items: center; gap: 22px; padding: 0 30px;
+    background: rgba(253,252,250,0.82); backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; flex: 0 0 auto; cursor: pointer; }
+  .burst { width: 24px; height: 24px; color: var(--accent); flex: 0 0 auto; }
+  .brand .name { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: 0; }
+  .brand .name span { color: var(--accent); font-style: italic; font-weight: 500; }
+  .search { margin-left: 6px; display: flex; align-items: center; gap: 8px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 7px 12px; min-width: 200px; color: var(--faint); font-size: 13px; }
+  .search input { border: none; background: none; outline: none; flex: 1;
+    font-family: var(--sans); font-size: 13px; color: var(--text); }
+  .search kbd { font-family: var(--sans); font-size: 11px; color: var(--faint);
+    border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; background: var(--bg); }
+  .top-links { margin-left: auto; display: flex; align-items: center; gap: 20px;
+    font-size: 14px; color: var(--text-soft); font-weight: 450; }
+  .top-links a { text-decoration: none; cursor: pointer; }
+  .top-links a:hover { color: var(--accent); }
+  .top-cta { background: var(--text); color: #fff !important; padding: 8px 15px;
+    border-radius: 10px; font-weight: 500; font-size: 13.5px; }
+  .top-cta:hover { background: var(--accent); }
+
+  .layout { display: grid; grid-template-columns: var(--side-w) minmax(0,1fr);
+    max-width: 1160px; margin: 0 auto; }
+
+  /* left nav */
+  .sidebar { position: sticky; top: var(--top-h); align-self: start;
+    height: calc(100vh - var(--top-h)); overflow-y: auto; padding: 34px 14px 60px;
+    border-right: 1px solid var(--line); }
+  .nav-group { margin-bottom: 4px; }
+  .nav-group h4 { margin: 20px 0 6px; padding: 0 14px; font-size: 11.5px; font-weight: 600;
+    color: var(--faint); text-transform: uppercase; letter-spacing: 1px; }
+  .nav-item { display: block; width: 100%; text-align: left; cursor: pointer; position: relative;
+    background: none; border: none; font-family: var(--sans); color: var(--muted);
+    font-size: 14px; line-height: 1.5; padding: 8px 14px; border-radius: 9px; margin: 1px 0;
+    transition: background .14s, color .14s; }
+  .nav-item:hover { background: var(--hover); color: var(--text); }
+  .nav-item.active { background: var(--active); color: var(--text); font-weight: 500; }
+  .nav-item.hidden { display: none; }
+  .nav-item.standalone { font-weight: 500; color: var(--text-soft); }
+
+  /* main — one continuous page */
+  .content { padding: 0 64px 150px; min-width: 0; }
+  .doc { max-width: 700px; }
+  section.block { padding-top: 60px; scroll-margin-top: 80px; }
+  section.block:first-child { padding-top: 52px; }
+  section.block + section.block { border-top: 1px solid var(--line-soft); }
+  .eyebrow { text-transform: uppercase; letter-spacing: 1.6px; font-size: 12px;
+    font-weight: 600; color: var(--accent); margin-bottom: 16px; }
+
+  h1 { font-family: var(--serif); font-weight: 500; font-size: 32px; line-height: 1.18;
+    letter-spacing: -.01em; color: var(--text); margin: 0 0 18px; }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 25px; line-height: 1.25;
+    letter-spacing: -.01em; color: var(--text); margin: 34px 0 10px; }
+  h3 { font-size: 14.5px; font-weight: 600; color: var(--accent-deep); margin: 26px 0 6px;
+    letter-spacing: .02em; }
+  h3 + ul, h3 + p { margin-top: 6px; }
+  p { margin: 15px 0; color: var(--text-soft); font-size: 16px; line-height: 1.78; }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--accent-deep); font-style: italic; }
+  ul, ol { padding-left: 22px; margin: 12px 0; color: var(--text-soft); }
+  li { margin: 7px 0; padding-left: 4px; line-height: 1.7; }
+  li::marker { color: var(--accent); }
+  blockquote { margin: 20px 0; padding: 14px 22px; border-left: 2.5px solid var(--accent);
+    background: var(--accent-wash); border-radius: 0 12px 12px 0; color: var(--text-soft); }
+  blockquote p { margin: 5px 0; }
+  code { background: var(--code-bg); padding: 2px 7px; border-radius: 6px;
+    font-family: var(--mono); font-size: 13.5px; color: var(--accent-deep); }
+  hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+  .doc a { color: var(--accent-deep); text-decoration: underline; text-decoration-thickness: 1px;
+    text-underline-offset: 2.5px; transition: color .12s; }
+  .doc a:hover { color: var(--accent); }
+
+  /* ---------- hero ---------- */
+  .hero { display: flex; align-items: center; gap: 44px; margin-bottom: 14px; }
+  .hero-text { flex: 1; min-width: 0; }
+  .hero-text h1 { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -.02em; }
+  .hero-text blockquote { border: none; background: none; padding: 0; margin: 0 0 16px;
+    font-family: var(--serif); font-weight: 400; font-size: 23px; line-height: 1.42; color: var(--text); }
+  .hero-text blockquote p { color: var(--text); font-size: 23px; margin: 0; }
+  .hero-sub { color: var(--muted); font-size: 14.5px; font-weight: 450; margin: 0; letter-spacing: .01em; }
+  .hero-avatar { flex: 0 0 auto; }
+  .hero-avatar img { width: 168px; height: 200px; object-fit: cover; border-radius: 18px;
+    border: 1px solid var(--line); box-shadow: 0 18px 40px -18px rgba(60,40,30,.35), 0 2px 8px rgba(0,0,0,.04); }
+  .avatar-fallback { width: 168px; height: 200px; border-radius: 18px; border: 1px dashed var(--line);
+    display: flex; align-items: center; justify-content: center; color: var(--faint);
+    font-size: 12px; text-align: center; padding: 14px; background: var(--paper); }
+
+  /* ---------- work / projects ---------- */
+  #work h2 { margin-top: 38px; }
+  #work h2:first-of-type { margin-top: 8px; }
+  #work h2 + p { margin: 0 0 6px; font-size: 12px; font-weight: 600; color: var(--faint);
+    text-transform: uppercase; letter-spacing: 1px; }
+  #work h2 + p em { font-style: normal; color: inherit; }
+  p.repo-link { margin: 14px 0 0; }
+  p.repo-link a { display: inline-flex; align-items: center; gap: 7px; text-decoration: none;
+    border: 1px solid var(--line); border-radius: 9px; padding: 7px 14px; font-size: 13px;
+    font-weight: 450; color: var(--text-soft); background: var(--paper);
+    transition: background .14s, border-color .14s, color .14s; }
+  p.repo-link a:hover { background: var(--hover); border-color: #ddd8cf; color: var(--accent-deep); }
+
+  @media (max-width: 900px) { .content { padding: 0 40px 110px; } }
+  @media (max-width: 820px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line);
+      padding: 12px 14px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+    .nav-group { margin: 0; display: contents; } .nav-group h4 { display: none; } .nav-item { width: auto; padding: 6px 12px; }
+    .search { display: none; } .top-links { gap: 14px; } .content { padding: 0 22px 80px; }
+    .doc { max-width: 100%; }
+    .hero { flex-direction: column-reverse; align-items: flex-start; gap: 22px; }
+    .hero-text h1 { font-size: 38px; }
+    .hero-text blockquote, .hero-text blockquote p { font-size: 19px; }
+    .hero-avatar img, .avatar-fallback { width: 120px; height: 144px; border-radius: 14px; }
+  }
+  @media (max-width: 560px) { .topbar { padding: 0 16px; gap: 12px; } .top-links a:not(.top-cta) { display: none; } }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" data-go="about">
+      <svg class="burst" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 1.5l1.9 6.1 5.2-3.6-3.6 5.2 6.1 1.9-6.1 1.9 3.6 5.2-5.2-3.6L12 22.5l-1.9-6.1-5.2 3.6 3.6-5.2L2.4 13l6.1-1.9-3.6-5.2 5.2 3.6L12 1.5z"/>
+      </svg>
+      <span class="name">马浩然 <span>Frank</span></span>
+    </a>
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input id="search" placeholder="搜索板块…" />
+      <kbd>⌘K</kbd>
+    </div>
+    <nav class="top-links">
+      <a data-go="work">作品</a>
+      <a data-go="now">现在</a>
+      <a class="top-cta" href="https://github.com/Mahaoran-Frank" target="_blank" rel="noopener">GitHub ›</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar"><nav id="menu"></nav></aside>
+    <main class="content"><div class="doc" id="doc"></div></main>
+  </div>
+
+  <!-- ============ 内容（直接改这里即可维护） ============ -->
+  <script type="text/markdown" data-key="about" data-label="概览" data-group="概览" data-eyebrow="">
+# 马浩然 / Frank
+
+> 我把复杂问题拆到底层机制，再重建成能用的框架 —— 用数据和 AI，让判断落到业务里。
+
+企业管理硕士在读 · 数据分析 / AI 方向 · 沈阳 / 远程 · 在找实习
+
+## 关于我
+
+我是一个习惯把现象拆到底层、再重建成框架的人。
+
+拿到一个问题，我的本能不是急着行动，而是先拆开看「这套系统底层的齿轮是怎么咬合的」—— 不满足于「是什么」，一定要追到「为什么」，然后追到「然后呢」。这套**第一性原理 + 系统思维**的方式，是我最顺手的认知武器。
+
+但我不是空谈理论的人。我信奉**实用理性主义**：知识的意义在于能用 —— 能转化成判断、能驱动决策的知识，才是高优先级的。我也不信「听起来对」，只信「验证过才算数」，习惯用「假设 → 验证 → 迭代」推进。
+
+背景上，我从南京财经大学人力资源管理本科，到辽宁大学企业管理硕士，再主动转向数据分析 + AI —— 因为这正是我能把「理解业务结构」和「拆解底层机制」两件最擅长的事合到一起的地方。
+  </script>
+
+  <script type="text/markdown" data-key="skills" data-label="能力" data-group="我能做什么" data-eyebrow="WHAT I DO">
+# 能力
+
+### 数据分析
+- **SQL**：多表连接、窗口函数、分组聚合
+- **Excel**：数据透视表、函数嵌套、图表制作
+- **方法**：指标体系搭建、漏斗分析、留存分析、异动归因、用户分层
+- **完整闭环**：问题定义 → 指标设计 → 数据分析 → 结论建议
+
+### AI 应用
+- 日常深度使用 Claude / ChatGPT / Gemini 处理复杂分析任务
+- 理解 Prompt / RAG / Agent / 评测，以及 AI 在企业的典型落地场景
+- 跨模型产品评测：对同一任务比较能力差异与失效模式
+
+### 商业 / 策略分析
+- 商业模式拆解、竞争格局量化（CR / HHI）、进入策略框架
+- 把模糊的商业判断，转成可比较、可验证的分析结构
+  </script>
+
+  <script type="text/markdown" data-key="work" data-label="作品" data-group="我能做什么" data-eyebrow="WORK">
+# 作品
+
+## Retailrocket RFIF 用户分层分析
+*独立项目 · 2025*
+
+发现传统 RFM 只能看历史购买、抓不住「高意向未转化」用户的局限，自创**四维分层框架**：R（购买近度）、F（购买频次）、I（浏览加购意向得分）、Fr（加购未成交摩擦率）。口径固化保证可复现，输出三类用户标签并对应到具体运营方向。
+
+## 新能源汽车价格带进入策略分析
+*独立项目 · 2025*
+
+围绕「新品牌首款车型该进哪个价格带」，用 CR / HHI 量化竞争格局，把市场规模、单车利润、回本周期、品牌门槛纳入统一决策结构，系统对比两个价格带，并用多场景敏感性分析验证结论稳健性。
+
+## AI 驱动的个人知识系统
+*个人项目 · 2025–至今*
+
+从零设计并搭建（Obsidian + Claude + iCloud），目前 420+ 笔记、5 个活跃主题域。三层架构：Inbox（原始输入不改动）→ Work（个人综合分析）→ Train（AI 验证）。自写 Claude Skill `/train`，用苏格拉底式对话发现理解漏洞、把新洞见写回原笔记。并对 Claude / Kimi / 豆包做了系统产品拆解。
+
+→ [查看代码：github.com/Mahaoran-Frank/obsidian-claude-pkm](https://github.com/Mahaoran-Frank/obsidian-claude-pkm)
+
+## AI 学术研究 Agent
+*辽宁大学 × 字节火山引擎 · 进行中 · 2025*
+
+作为经济管理领域代表，负责梳理科研工作流、识别 AI 介入的真实价值点，把研究者的隐性需求翻译成可测试的功能需求，并提出区别于通用场景的领域质量标准（来源可信度、逻辑一致性、引用准确性）。
+  </script>
+
+  <script type="text/markdown" data-key="now" data-label="现在在做什么" data-group="我在往哪走" data-eyebrow="NOW">
+# 现在在做什么
+
+### 在找两个方向的实习
+- **数据分析** —— 业务数据分析实习（RFIF、价格带策略等作品支撑）
+- **AI 方向** —— AI 产品 / AI 应用相关（知识系统、AI Agent、跨模型产品拆解支撑）
+
+### 在补的功课
+SQL 手写、统计细节、产品理解、AI 底层机制（《图解大模型》）
+
+### 在建的
+自己的商业模式分析框架
+  </script>
+
+  <script type="text/markdown" data-key="system" data-label="在建的体系" data-group="我在往哪走" data-eyebrow="DIRECTION">
+# 我在建的体系
+
+比起「学会某个工具」，我更想搭建能跨场景迁移的认知体系。几条正在长期投入的线，其实彼此相连：
+
+- **AI（技术 + 商业）** —— 最深的一条。从应用层往下补底层机制，目标是真正讲清 AI 怎么运转、又怎么在企业里落地。
+- **商业模式** —— 沉淀一套自己的分析框架，拿到一家公司能快速判断它靠什么成立、强在哪、弱在哪。
+- **金融与投资** —— 从「一家公司怎么赚钱」这样的微观问题入手，逐步往上接行业格局与宏观。
+- **知识系统** —— 把「学习」本身做成一套可复利的方法，越积累越快 —— 这个网站背后就是它。
+
+这几条最终指向同一件事：**看懂复杂系统怎么运转，再把判断真正用出来。**
+  </script>
+
+  <script type="text/markdown" data-key="contact" data-label="联系" data-group="联系" data-eyebrow="CONTACT">
+# 联系
+
+想聊聊、合作或招聘，欢迎找我：
+
+- **邮箱**：[mhr20011020@gmail.com](mailto:mhr20011020@gmail.com)
+- **GitHub**：[github.com/Mahaoran-Frank](https://github.com/Mahaoran-Frank)
+- **坐标**：沈阳 · 可远程
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script>
+  marked.setOptions({ breaks: true, gfm: true });
+  const AVATAR = "avatar.jpg"; // 把照片以这个文件名放进同目录即可
+
+  const blocks = [...document.querySelectorAll('script[type="text/markdown"]')].map(s => ({
+    key: s.dataset.key, label: s.dataset.label, group: s.dataset.group,
+    eyebrow: s.dataset.eyebrow, md: s.textContent.trim()
+  }));
+
+  const doc = document.getElementById("doc");
+  const menu = document.getElementById("menu");
+  const search = document.getElementById("search");
+
+  // render all sections stacked (one continuous page)
+  blocks.forEach(b => {
+    const sec = document.createElement("section");
+    sec.className = "block"; sec.id = b.key;
+    const eb = b.eyebrow ? `<div class="eyebrow">${b.eyebrow}</div>` : "";
+    sec.innerHTML = eb + marked.parse(b.md);
+    doc.appendChild(sec);
+  });
+
+  // external links new tab
+  doc.querySelectorAll('a[href^="http"]').forEach(a => { a.target = "_blank"; a.rel = "noopener"; });
+  // project repo links
+  doc.querySelectorAll("p").forEach(p => {
+    if (p.textContent.trim().startsWith("→") && p.querySelector("a")) p.classList.add("repo-link");
+  });
+
+  // build hero (avatar + name + one-liner + subline) inside #about
+  (function buildHero() {
+    const about = document.getElementById("about");
+    const h1 = about.querySelector("h1");
+    const bq = about.querySelector("blockquote");
+    let sub = bq ? bq.nextElementSibling : null;
+    if (!h1) return;
+    const hero = document.createElement("div"); hero.className = "hero";
+    const text = document.createElement("div"); text.className = "hero-text";
+    const av = document.createElement("div"); av.className = "hero-avatar";
+    const img = new Image();
+    img.alt = "马浩然 Frank"; img.src = AVATAR;
+    img.onerror = () => {
+      const fb = document.createElement("div"); fb.className = "avatar-fallback";
+      fb.textContent = "把照片存为 avatar.jpg 放进本目录即可显示";
+      av.replaceChildren(fb);
+    };
+    av.appendChild(img);
+    about.insertBefore(hero, h1);
+    text.appendChild(h1);
+    if (bq) text.appendChild(bq);
+    if (sub && sub.tagName === "P") { sub.classList.add("hero-sub"); text.appendChild(sub); }
+    hero.append(text, av);
+  })();
+
+  // sidebar: single-item group => standalone clickable; multi-item => header + children
+  const groups = [];
+  blocks.forEach(b => {
+    let g = groups.find(x => x.name === b.group);
+    if (!g) { g = { name: b.group, items: [] }; groups.push(g); }
+    g.items.push(b);
+  });
+  groups.forEach(g => {
+    const wrap = document.createElement("div"); wrap.className = "nav-group";
+    if (g.items.length === 1) {
+      const it = g.items[0];
+      const btn = document.createElement("button");
+      btn.className = "nav-item standalone"; btn.textContent = g.name; btn.dataset.key = it.key;
+      btn.onclick = () => goto(it.key); wrap.appendChild(btn);
+    } else {
+      wrap.innerHTML = `<h4>${g.name}</h4>`;
+      g.items.forEach(it => {
+        const btn = document.createElement("button");
+        btn.className = "nav-item"; btn.textContent = it.label; btn.dataset.key = it.key;
+        btn.onclick = () => goto(it.key); wrap.appendChild(btn);
+      });
+    }
+    menu.appendChild(wrap);
+  });
+
+  function goto(key) {
+    const el = document.getElementById(key); if (!el) return;
+    history.replaceState(null, "", "#" + key);
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  document.querySelectorAll("[data-go]").forEach(el =>
+    el.addEventListener("click", e => { e.preventDefault(); goto(el.dataset.go); }));
+
+  // scrollspy
+  const sections = blocks.map(b => document.getElementById(b.key));
+  function spy() {
+    let cur = blocks[0].key;
+    sections.forEach(s => { if (s.getBoundingClientRect().top <= 140) cur = s.id; });
+    document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("active", el.dataset.key === cur));
+  }
+  window.addEventListener("scroll", spy, { passive: true }); spy();
+
+  // search filters nav
+  search.addEventListener("input", () => {
+    const q = search.value.trim().toLowerCase();
+    document.querySelectorAll(".nav-item").forEach(el => {
+      const b = blocks.find(x => x.key === el.dataset.key);
+      el.classList.toggle("hidden", q && !(el.textContent.toLowerCase().includes(q) || b.md.toLowerCase().includes(q)));
+    });
+  });
+  document.addEventListener("keydown", e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); search.focus(); }
+  });
+
+  const k = location.hash.replace("#", "");
+  if (k && document.getElementById(k)) setTimeout(() => goto(k), 60);
+</script>
+</body>
+</html>
