@@ -1,481 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>马浩然 Frank — 个人主页</title>
-<meta name="description" content="马浩然 Frank · 数据分析 / AI 方向 · 把复杂问题拆到底层机制，再重建成能用的框架" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Noto+Serif+SC:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="preconnect" href="https://cdn.jsdelivr.net" />
-<style>
-  :root {
-    --paper:#f7f4ec; --paper2:#fffdf8; --ink:#1c1a16; --ink-soft:#433f37; --muted:#6f695c;
-    --faint:#a79f90; --line:#e4ddcf; --line-2:#efe9dd; --rule:#1c1a16;
-    --accent:#bf4d2a; --accent-deep:#a23e20; --accent-soft:#f1e7dc; --accent-wash:#f8efe7;
-    --sans:"Inter", system-ui, -apple-system, "PingFang SC", "Segoe UI", sans-serif;
-    --display:"Fraunces","Noto Serif SC", Georgia, "Times New Roman", serif;
-    --serif-cjk:"Noto Serif SC", "Songti SC", serif;
-    --mono:ui-monospace,"SF Mono",Menlo,monospace;
-  }
-  * { box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { margin:0; background:var(--paper); color:var(--ink);
-    font-family:var(--sans); font-size:17px; line-height:1.72; letter-spacing:.004em;
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
-  a { color:inherit; }
-  ::selection { background:var(--accent-soft); }
-  img { display:block; max-width:100%; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello, this is Frank</title>
+    <meta
+      name="description"
+      content="Frank Ma 的个人首页原型，关于个人知识系统、AI 行为设计、经济学阅读和产业 AI 落地。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top-links" aria-label="个人链接">
+      <a href="https://github.com/Mahaoran-Frank" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://github.com/Mahaoran-Frank/obsidian-claude-pkm" target="_blank" rel="noreferrer">Knowledge System</a>
+    </header>
 
-  .wrap { max-width:1180px; margin:0 auto; padding:0 48px; }
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="sky-haze sky-haze-one"></div>
+      <div class="sky-haze sky-haze-two"></div>
+      <div class="sky-object sky-object-one"></div>
+      <div class="sky-object sky-object-two"></div>
+      <div class="sky-object sky-object-three"></div>
+      <div class="glider glider-one"></div>
+      <div class="glider glider-two"></div>
+      <div class="glider glider-three"></div>
+      <div class="glider glider-four"></div>
 
-  /* ---------- masthead ---------- */
-  .masthead { position:sticky; top:0; z-index:50; background:rgba(247,244,236,.86);
-    backdrop-filter:saturate(170%) blur(10px); border-bottom:1.5px solid var(--rule); }
-  .masthead .wrap { display:flex; align-items:center; gap:24px; height:62px; }
-  .mark { display:flex; align-items:baseline; gap:9px; text-decoration:none; cursor:pointer; flex:0 0 auto; }
-  .mark .cn { font-family:var(--serif-cjk); font-weight:700; font-size:19px; letter-spacing:.04em; color:var(--ink); }
-  .mark .en { font-family:var(--display); font-style:italic; font-weight:600; font-size:16px; color:var(--accent); }
-  .mast-nav { margin-left:auto; display:flex; align-items:center; gap:26px; }
-  .mast-nav a { text-decoration:none; font-size:12px; font-weight:600; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--muted); cursor:pointer; transition:color .14s; position:relative; }
-  .mast-nav a:hover, .mast-nav a.on { color:var(--ink); }
-  .mast-nav a.on::after { content:""; position:absolute; left:0; right:0; bottom:-21px; height:2px; background:var(--accent); }
-  .mast-cta { color:var(--accent) !important; }
-
-  /* ---------- hero ---------- */
-  .hero { padding:64px 0 30px; border-bottom:1.5px solid var(--rule); }
-  .hero-grid { display:grid; grid-template-columns:1fr 300px; gap:54px; align-items:end; }
-  .kicker { font-family:var(--mono); font-size:12px; letter-spacing:.22em; text-transform:uppercase;
-    color:var(--accent); margin-bottom:26px; display:flex; align-items:center; gap:12px; }
-  .kicker::before { content:""; width:34px; height:1.5px; background:var(--accent); display:inline-block; }
-  .hero h1 { font-family:var(--display); font-weight:900; color:var(--ink);
-    font-size:clamp(29px, 3.7vw, 45px); line-height:1.14; letter-spacing:-.012em; margin:0 0 26px;
-    text-wrap:balance; }
-  .hero h1 em { font-style:italic; color:var(--accent); font-weight:600; }
-  .hero .deck { font-family:var(--serif-cjk); font-weight:500; font-size:16px; color:var(--ink-soft);
-    letter-spacing:.02em; margin:0 0 30px; max-width:50ch; }
-  .hero .byline { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
-  .hero .byline .nm { font-family:var(--serif-cjk); font-weight:700; font-size:17px; color:var(--ink); }
-  .hero .byline .nm i { font-family:var(--display); font-style:italic; font-weight:600; color:var(--accent); margin-left:6px; }
-  .btn { display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-size:13px; font-weight:600;
-    letter-spacing:.02em; padding:9px 16px; border-radius:2px; transition:all .15s; }
-  .btn-solid { background:var(--ink); color:var(--paper) !important; }
-  .btn-solid:hover { background:var(--accent); }
-  .btn-ghost { border:1.4px solid var(--ink); color:var(--ink) !important; }
-  .btn-ghost:hover { background:var(--ink); color:var(--paper) !important; }
-  .hero-photo { position:relative; }
-  .hero-photo img { width:100%; aspect-ratio:5/6; object-fit:cover; border:1.5px solid var(--rule);
-    filter:grayscale(.12) contrast(1.02); }
-  .hero-photo .cap { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-    color:var(--muted); margin-top:9px; display:flex; justify-content:space-between; }
-  .photo-fallback { width:100%; aspect-ratio:5/6; border:1.5px dashed var(--line); display:flex;
-    align-items:center; justify-content:center; text-align:center; padding:18px; color:var(--faint);
-    font-size:12px; background:var(--paper2); }
-
-  /* ---------- sections ---------- */
-  section.sec { padding:52px 0 12px; }
-  .sec-head { display:grid; grid-template-columns:1fr auto; align-items:baseline;
-    border-top:1.5px solid var(--rule); padding-top:16px; column-gap:20px; }
-  .sec-id { display:flex; align-items:baseline; gap:16px; }
-  .sec-num { font-family:var(--display); font-weight:900; font-size:30px; color:var(--accent); line-height:1; }
-  .sec-en { font-family:var(--mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
-  .sec-zh { font-family:var(--serif-cjk); font-weight:700; font-size:23px; color:var(--ink); margin:0; letter-spacing:.02em; }
-  .sec-body { margin-top:30px; }
-  .measure { max-width:680px; }
-
-  /* prose */
-  .prose p { margin:0 0 18px; color:var(--ink-soft); font-size:17px; line-height:1.82; }
-  .prose strong { color:var(--ink); font-weight:600; }
-  .prose em { font-family:var(--display); font-style:italic; color:var(--accent-deep); }
-  #about .prose > p:first-of-type::first-letter { font-family:var(--display); font-weight:900; font-size:3.5em;
-    line-height:.78; float:left; margin:8px 12px -2px 0; color:var(--accent); }
-  .prose h3 { font-family:var(--serif-cjk); font-weight:700; font-size:15px; color:var(--ink);
-    letter-spacing:.03em; margin:26px 0 6px; }
-  .prose h3 + p { margin-top:0; }
-
-  /* capabilities — 3 cols */
-  .grid-caps { display:grid; grid-template-columns:repeat(3,1fr); gap:0 36px; }
-  .grid-caps .item { border-top:1px solid var(--line); padding:18px 0 4px; }
-  .grid-caps h3 { font-family:var(--serif-cjk); font-weight:700; font-size:16px; color:var(--ink); margin:0 0 10px;
-    display:flex; align-items:center; gap:9px; }
-  .grid-caps h3::before { content:""; width:7px; height:7px; background:var(--accent); border-radius:50%; flex:0 0 auto; }
-  .grid-caps p { margin:0; font-size:14.5px; line-height:1.74; color:var(--muted); }
-
-  /* work */
-  .work .item { border-top:1px solid var(--line); padding:30px 0; display:grid;
-    grid-template-columns:46px 1fr; column-gap:8px; }
-  .work .item .idx { font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.1em;
-    color:var(--accent); padding-top:7px; }
-  .work .item .bd { max-width:660px; }
-  .work h3 { font-family:var(--display); font-weight:600; font-size:23px; line-height:1.22; color:var(--ink);
-    margin:0 0 6px; letter-spacing:-.005em; }
-  .work .meta { font-family:var(--mono); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase;
-    color:var(--faint); margin:0 0 14px; }
-  .work .meta em { font-style:normal; }
-  .work p { margin:0 0 12px; color:var(--ink-soft); font-size:15.5px; line-height:1.74; }
-  .work strong { color:var(--ink); font-weight:600; }
-  .work blockquote { margin:14px 0 0; padding:11px 0 11px 18px; border-left:2.5px solid var(--accent);
-    color:var(--accent-deep); font-weight:500; font-size:15px; background:none; }
-  .work blockquote p { margin:0; color:var(--accent-deep); }
-  .work .repo { margin:14px 0 0; }
-  .work .repo a { display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-size:12.5px;
-    font-weight:600; color:var(--ink-soft); border:1.3px solid var(--line); border-radius:2px; padding:7px 13px;
-    transition:all .15s; }
-  .work .repo a:hover { border-color:var(--ink); color:var(--ink); }
-
-  /* frameworks — lexicon 2 cols */
-  .sub { font-size:14.5px; color:var(--muted); margin:-8px 0 26px; max-width:60ch; line-height:1.7; }
-  .sub b, .sub strong { color:var(--accent-deep); font-weight:600; }
-  .sub code { font-family:var(--mono); font-size:.86em; background:var(--accent-wash); color:var(--accent-deep); padding:1px 6px; border-radius:3px; }
-  .lex { display:grid; grid-template-columns:1fr 1fr; gap:0 44px; }
-  .lex .item { border-top:1px solid var(--line); padding:20px 0; break-inside:avoid; }
-  .lex h3 { font-family:var(--serif-cjk); font-weight:700; font-size:16.5px; color:var(--ink); margin:0 0 7px;
-    line-height:1.4; letter-spacing:.01em; }
-  .lex h3::before { content:"✦"; color:var(--accent); margin-right:9px; font-size:13px; }
-  .lex p { margin:0; font-size:14px; line-height:1.7; color:var(--muted); }
-
-  /* reading list */
-  .read .item { border-top:1px solid var(--line); padding:18px 0; display:grid;
-    grid-template-columns:minmax(220px,300px) 1fr; column-gap:34px; align-items:baseline; }
-  .read h3 { font-family:var(--serif-cjk); font-weight:700; font-size:16px; color:var(--ink); margin:0; line-height:1.5; }
-  .read h3 .au { font-family:var(--mono); font-weight:400; font-size:11px; letter-spacing:.08em;
-    text-transform:uppercase; color:var(--faint); display:block; margin-top:4px; }
-  .read p { margin:0; font-size:14.5px; line-height:1.7; color:var(--muted); }
-
-  /* contact */
-  .contact .sec-body { max-width:none; }
-  .contact .big { font-family:var(--display); font-weight:600; font-size:clamp(26px,3.4vw,40px);
-    line-height:1.22; color:var(--ink); letter-spacing:-.01em; margin:0 0 30px; max-width:18ch; }
-  .contact .big em { font-style:italic; color:var(--accent); }
-  .clist { display:flex; flex-direction:column; }
-  .clist a, .clist span.row { display:inline-flex; align-items:baseline; gap:16px; text-decoration:none;
-    font-size:16px; color:var(--ink); border-bottom:1px solid var(--line); padding:13px 0; width:100%;
-    max-width:560px; transition:color .14s; }
-  .clist a:hover { color:var(--accent); }
-  .clist .lbl { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--muted); flex:0 0 96px; }
-  .clist a:hover .lbl { color:var(--accent); }
-
-  footer.site { border-top:1.5px solid var(--rule); margin-top:60px; padding:26px 0 80px;
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-    font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; color:var(--faint); text-transform:uppercase; }
-  footer.site a { color:var(--muted); text-decoration:none; }
-  footer.site a:hover { color:var(--accent); }
-
-  /* ---------- responsive ---------- */
-  @media (max-width:880px) {
-    .wrap { padding:0 28px; }
-    .hero-grid { grid-template-columns:1fr; gap:34px; }
-    .hero-photo { max-width:240px; }
-    .lex { grid-template-columns:1fr; gap:0; }
-    .grid-caps { grid-template-columns:1fr; }
-    .read .item { grid-template-columns:1fr; row-gap:6px; }
-    .mast-nav a:not(.mast-cta) { display:none; }
-  }
-  @media (max-width:560px) {
-    body { font-size:16px; }
-    .wrap { padding:0 20px; }
-    .hero { padding:42px 0 26px; }
-    .work .item { grid-template-columns:1fr; } .work .item .idx { padding:0 0 6px; }
-  }
-</style>
-</head>
-<body>
-
-  <header class="masthead">
-    <div class="wrap">
-      <a class="mark" data-go="top"><span class="cn">马浩然</span><span class="en">Frank</span></a>
-      <nav class="mast-nav">
-        <a data-go="about">关于</a>
-        <a data-go="work">作品</a>
-        <a data-go="frameworks">框架</a>
-        <a data-go="reading">在读</a>
-        <a class="mast-cta" href="https://github.com/Mahaoran-Frank" target="_blank" rel="noopener">GitHub ↗</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap" id="top">
-
-    <!-- ============ HERO ============ -->
-    <section class="hero">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <div class="kicker">个人主页 · 数据分析 / AI</div>
-          <h1>我把复杂问题拆到底层机制，再重建成<em>能用的框架</em>。</h1>
-          <p class="deck">用数据和 AI，让判断真正落到业务里。企业管理硕士在读 · 沈阳 / 可远程 · 在找实习。</p>
-          <div class="byline">
-            <span class="nm">马浩然<i>Frank</i></span>
-            <a class="btn btn-solid" href="mailto:mhr20011020@gmail.com">写邮件 ↗</a>
-            <a class="btn btn-ghost" href="https://github.com/Mahaoran-Frank" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-        <div class="hero-photo">
-          <img id="avatar" alt="马浩然 Frank" />
-          <div class="cap"><span>马浩然 / Frank</span><span>沈阳 · 2026</span></div>
-        </div>
+      <div class="hero-inner">
+        <h1 id="hero-title">
+          Hello,<br />
+          this is Frank.
+        </h1>
+        <p>Learner, Builder, AI PM in progress.</p>
       </div>
     </section>
 
-    <div id="doc"></div>
+    <main class="journal">
+      <section class="intro reveal">
+        <p>
+          我在搭一套让 AI 读懂个人上下文的知识系统。
+        </p>
+        <p>
+          不是为了让 AI 替我思考，而是为了更清醒地学习、判断和行动。
+        </p>
+        <p>
+          我习惯先把问题拆开：一个判断从哪里来，边界在哪里，能不能落到现实里。
+          这些问题比一个漂亮结论更吸引我。
+        </p>
+      </section>
 
-    <footer class="site">
-      <span>马浩然 Frank — 个人主页</span>
-      <span>由我的知识系统驱动 · <a href="https://github.com/Mahaoran-Frank" target="_blank" rel="noopener">GitHub</a></span>
-    </footer>
-  </main>
+      <section class="entry reveal">
+        <p class="entry-label">系统 · SYSTEM</p>
+        <h2>Frank Knowledge System</h2>
+        <p>
+          这是一个基于 Obsidian + Agent 的个人知识系统。
+        </p>
+        <p>
+          它不是简单的笔记库，而是我用来管理学习、计划断点和 AI 协作上下文的工作流。
+          我希望 AI 不是每次都从零认识我，而是能基于我的知识、计划状态和协作规则继续工作。
+        </p>
+      </section>
 
-  <!-- ============ 内容：直接改这里维护。加一条 = 写一段 markdown ============ -->
+      <div class="divider" aria-hidden="true"></div>
 
-  <script type="text/markdown" data-key="about" data-num="01" data-en="About" data-zh="关于" data-layout="prose">
-我习惯把现象拆到底层、再重建成框架。拿到一个问题，我的本能不是急着行动，而是先拆开看「这套系统底层的齿轮怎么咬合」—— 不满足于「是什么」，一定追到「为什么」，再追到「然后呢」。这套**第一性原理 + 系统思维**，是我最顺手的认知武器。
+      <section class="entry reveal">
+        <p class="entry-label">提示 · PROMPT</p>
+        <h2>System Prompt 学习与拆解</h2>
+        <p>
+          我在研究 AI 的行为是怎么被设计出来的。
+        </p>
+        <p>
+          一个好的 system prompt 不只是“写几条规则”，而是要定义角色、处境、边界、工具和失败处理方式。
+          我关心的是：怎样让 AI 稳定地做对事，而不是偶尔给出一个漂亮答案。
+        </p>
+      </section>
 
-但我不空谈理论。我信奉**实用理性主义**：能转化成判断、能驱动决策的知识，才是高优先级的；我不信「听起来对」，只信「验证过才算数」，习惯用「假设 → 验证 → 迭代」推进。
+      <div class="divider" aria-hidden="true"></div>
 
-从南京财经大学人力资源本科，到辽宁大学企业管理硕士，再主动转向数据分析 + AI —— 因为这正是把「理解业务结构」和「拆解底层机制」这两件我最擅长的事，合到一起的地方。
-  </script>
+      <section class="entry reveal reading-entry">
+        <p class="entry-label">阅读 · READING</p>
+        <h2>《小岛经济学》阅读线</h2>
+        <p>
+          我用《小岛经济学》补经济学底层直觉。
+        </p>
+        <p>
+          资本、储蓄、信贷、生产、利率这些词，只有放回一个简单故事里，才会真正长出感觉。
+          我读书不是为了收集结论，而是为了追问：这个解释成立吗？边界在哪里？它能不能解释现实？
+        </p>
+        <blockquote>
+          增长的起点不是更卖力地抓鱼，而是停下来、饿一天、去造工具。
+        </blockquote>
+      </section>
 
-  <script type="text/markdown" data-key="skills" data-num="02" data-en="Capabilities" data-zh="能力" data-layout="caps">
-### 数据分析
-SQL（多表连接 · 窗口函数 · 分组聚合）· Excel（透视表 · 函数嵌套 · 图表）· 指标体系 · 漏斗 / 留存 / 异动归因 / 用户分层 · 闭环：问题定义 → 指标设计 → 分析 → 结论建议。
+      <div class="divider" aria-hidden="true"></div>
 
-### AI 应用
-深度使用 Claude / ChatGPT / Gemini 跑复杂分析 · 理解 Prompt / RAG / Agent / 评测与企业落地 · 对 Claude / Kimi / 豆包做过系统级产品拆解。
+      <section class="entry reveal">
+        <p class="entry-label">产业 · INDUSTRY</p>
+        <h2>神东采掘规划智能体</h2>
+        <p>
+          这是一个真实产业场景里的 AI 落地问题。
+        </p>
+        <p>
+          它让我看到，AI 不是只负责生成答案，而要接住业务约束、优化模型、风险解释和专家裁决。
+          真正难的地方不是文本生成，而是让 AI 进入复杂业务里的责任链。
+        </p>
+      </section>
 
-### 商业 / 策略
-商业模式拆解 · 竞争格局量化（CR / HHI）· 进入策略框架 · 把模糊的商业判断，转成可比较、可验证的分析结构。
-  </script>
+      <div class="divider" aria-hidden="true"></div>
 
-  <script type="text/markdown" data-key="work" data-num="03" data-en="Selected Work" data-zh="作品" data-layout="work">
-### Retailrocket RFIF 用户分层
-*独立项目 · 2025*
+      <section class="entry reveal direction">
+        <p class="entry-label">方向 · DIRECTION</p>
+        <h2>eval 驱动的 AI 落地 PM</h2>
+        <p>
+          这里的 eval 不是简单测试，而是定义什么叫好。
+        </p>
+        <p>
+          在真实业务场景里，AI 的回答、建议或行动到底算不算对，需要有人把模糊的质量拆成可以判断的标准。
+          我想成为做这件事的人：理解业务，理解 AI，也能把两边的“好”对齐。
+        </p>
+      </section>
 
-发现传统 RFM 只看历史购买、抓不住「高意向未转化」用户，自创 **RFIF 四维框架**：购买近度、频次、浏览加购意向得分、加购未成交摩擦率。口径固化，保证可复现。
+      <footer class="footer reveal">
+        <p>Frank Ma</p>
+        <p>2026</p>
+      </footer>
+    </main>
 
-> 产出三类可运营用户标签，每类对应到具体运营动作。
-
-### 新能源汽车价格带进入策略
-*独立项目 · 2025*
-
-围绕「新品牌首款车型进哪个价格带」，用 **CR / HHI** 量化竞争格局，把市场规模、单车利润、回本周期、品牌门槛纳入统一决策结构，多场景敏感性分析验证稳健性。
-
-> 给出可落地的进入价格带建议，并说明它在什么条件下会失效。
-
-### AI 驱动的个人知识系统
-*个人项目 · 2025 至今*
-
-从零设计搭建（Obsidian + Claude + iCloud），420+ 笔记、5 个活跃主题域。三层架构：Inbox 原始输入 → Work 个人分析 → Train AI 验证。自写 Claude Skill `/train`，用苏格拉底式追问戳破「我懂了」的错觉，把新判断写回笔记。
-
-> 一个会自己长大的系统 —— 你正在看的这个网站，就是它的对外门面。
-
-→ [github.com/Mahaoran-Frank/obsidian-claude-pkm](https://github.com/Mahaoran-Frank/obsidian-claude-pkm)
-
-### AI 学术研究 Agent
-*辽宁大学 × 字节火山引擎 · 进行中 · 2025*
-
-作为经济管理领域代表，梳理科研工作流、识别 AI 介入的真实价值点，把研究者的隐性需求翻译成可测试的功能需求。
-
-> 提出区别于通用场景的领域质量标准：来源可信度、逻辑一致性、引用准确性。
-  </script>
-
-  <script type="text/markdown" data-key="frameworks" data-num="04" data-en="Frameworks" data-zh="思维框架" data-layout="lex" data-sub="跨文档反复验证、能迁移到新场景的判断。这是我用 `/train` 一条条逼出来、写进知识库的——也是我最想被看到的东西。持续更新中。">
-### 造星 vs. 消费星
-内容平台不该买已有的注意力，而要用内容本身生产新的注意力资产：消费星是成本，造星是投资。
-
-### 结构性崩塌中的个人例外
-废墟里能有幸存者，但靠的是个人护城河——不能用例外来反驳结构。
-
-### 叙事结构性接管
-一个叙事失效，下一个现成叙事会自动填进来；直到无可填，个体才被迫自己回答「我要什么」。
-
-### 有竞争力 ≠ 有壁垒
-能通过人才流动或供应商扩散的领先，不是真壁垒。壁垒需要结构性优势，不只是技术领先。
-
-### AI 拉大差距，而非缩小
-AI 是放大器，不是均衡器——它放大的是使用者本身已有的能力。
-
-### 标签排除的人，可能正是潜在用户
-定位越具体，排除的人越多；市场饱和时，被标签挡在外面的人往往是下一波增长。
-  </script>
-
-  <script type="text/markdown" data-key="reading" data-num="05" data-en="Reading" data-zh="在读" data-layout="read" data-sub="读不是为了「读过」，是为了把别人的框架拆开、变成自己能用的判断。13 篇笔记持续更新，这里是几本影响我最深的。">
-### 穷查理宝典 <span class="au">查理·芒格</span>
-建一套跨学科的「多元思维模型」格栅——投资只是好思维方式的一个应用场景。
-
-### 思考，快与慢 <span class="au">丹尼尔·卡尼曼</span>
-系统 1 / 系统 2 与框架效应：为什么人很难真正用统计的方式去思考。
-
-### 原子习惯 <span class="au">James Clear</span>
-以身份为目标，而非结果——「我是一个健康的人」胜过「我想减肥」。
-
-### 精益数据分析 <span class="au">Lean Analytics</span>
-OMTM 唯一关键指标 + 创业五阶段——我数据分析「业务感」的主要来源。
-
-### 像哲学家一样生活 <span class="au">William Irvine · 斯多葛</span>
-控制二分法：把对不可控之物的追求，换成对可控之物（品格、努力）的投入。
-
-### 平台战略 <span class="au">商业模式革命</span>
-平台如何用「连接」重构整条产业链——我商业模式框架的一块拼图。
-  </script>
-
-  <script type="text/markdown" data-key="now" data-num="06" data-en="Now" data-zh="现在" data-layout="prose">
-### 在找两个方向的实习
-**数据分析** —— 业务数据分析实习（RFIF、价格带策略等作品支撑）。**AI 方向** —— AI 产品 / AI 应用相关（知识系统、AI Agent、跨模型拆解支撑）。可立即到岗 · 可实习 6 个月 · 沈阳 / 远程。
-
-### 在补的功课
-SQL 手写 · 统计细节 · 产品理解 · AI 底层机制（《图解大模型》）。
-
-### 在建的体系
-AI（技术 + 商业）· 商业模式分析框架 · 金融与投资 · 知识系统 —— 几条线最终指向同一件事：**看懂复杂系统怎么运转，再把判断真正用出来。**
-  </script>
-
-  <script type="text/markdown" data-key="contact" data-num="07" data-en="Contact" data-zh="联系" data-layout="contact">
-<p class="big">想聊聊、合作，或者觉得我适合某个<em>位置</em>——欢迎找我。</p>
-
-- **EMAIL** · [mhr20011020@gmail.com](mailto:mhr20011020@gmail.com)
-- **GITHUB** · [github.com/Mahaoran-Frank](https://github.com/Mahaoran-Frank)
-- **坐标** · 沈阳 · 可远程
-  </script>
-
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
-<script>
-  marked.setOptions({ breaks:true, gfm:true });
-  const AVATAR = "avatar.jpg";
-
-  // avatar with graceful fallback
-  (function(){
-    const img = document.getElementById("avatar");
-    img.src = AVATAR;
-    img.onerror = () => {
-      const fb = document.createElement("div");
-      fb.className = "photo-fallback";
-      fb.textContent = "把照片存为 avatar.jpg 放进同目录即可显示";
-      img.replaceWith(fb);
-    };
-  })();
-
-  const blocks = [...document.querySelectorAll('script[type="text/markdown"]')].map(s => ({
-    key:s.dataset.key, num:s.dataset.num, en:s.dataset.en, zh:s.dataset.zh,
-    layout:s.dataset.layout, sub:s.dataset.sub || "", md:s.textContent.trim()
-  }));
-
-  const doc = document.getElementById("doc");
-
-  // group consecutive nodes under each <h3> into .item wrappers
-  function groupByH3(container){
-    const kids = [...container.childNodes];
-    container.innerHTML = "";
-    let cur = null;
-    kids.forEach(n => {
-      if (n.nodeType === 1 && n.tagName === "H3") {
-        cur = document.createElement("div"); cur.className = "item";
-        container.appendChild(cur); cur.appendChild(n);
-      } else if (cur) {
-        cur.appendChild(n);
-      } else if (n.nodeType === 1) {
-        container.appendChild(n);
-      }
-    });
-  }
-
-  blocks.forEach(b => {
-    const sec = document.createElement("section");
-    sec.className = "sec " + b.key; sec.id = b.key;
-
-    const head = document.createElement("div");
-    head.className = "sec-head";
-    head.innerHTML =
-      `<div class="sec-id"><span class="sec-num">${b.num}</span><span class="sec-en">${b.en}</span></div>` +
-      `<h2 class="sec-zh">${b.zh}</h2>`;
-    sec.appendChild(head);
-
-    const body = document.createElement("div");
-    body.className = "sec-body";
-    if (b.sub) {
-      const sub = document.createElement("p"); sub.className = "sub";
-      sub.innerHTML = marked.parseInline(b.sub); body.appendChild(sub);
-    }
-    const inner = document.createElement("div");
-    inner.innerHTML = marked.parse(b.md);
-
-    if (b.layout === "prose")  { inner.classList.add("prose","measure"); }
-    if (b.layout === "caps")   { inner.classList.add("grid-caps"); groupByH3(inner); }
-    if (b.layout === "work")   { groupByH3(inner); inner.querySelectorAll(".item").forEach(decorateWork); }
-    if (b.layout === "lex")    { inner.classList.add("lex"); groupByH3(inner); }
-    if (b.layout === "read")   { inner.classList.add("read"); groupByH3(inner); }
-    if (b.layout === "contact"){ decorateContact(inner); }
-
-    if (b.layout === "work") sec.classList.add("work");
-    if (b.layout === "read") sec.classList.add("read");
-    if (b.layout === "contact") sec.classList.add("contact");
-
-    body.appendChild(inner);
-    sec.appendChild(body);
-    doc.appendChild(sec);
-  });
-
-  // work: split into index + body, tag meta line and repo line
-  function decorateWork(item){
-    const idx = document.createElement("div"); idx.className="idx";
-    const bd  = document.createElement("div"); bd.className="bd";
-    [...item.childNodes].forEach(n => bd.appendChild(n));
-    bd.querySelectorAll("p").forEach(p => {
-      const em = p.querySelector("em");
-      if (em && p.textContent.trim() === em.textContent.trim()) p.classList.add("meta");
-      if (p.textContent.trim().startsWith("→")) p.classList.add("repo");
-    });
-    item.innerHTML=""; item.append(idx, bd);
-  }
-  function numberWork(){
-    document.querySelectorAll(".work .item .idx").forEach((el,i)=> el.textContent = "W"+(i+1));
-  }
-
-  function decorateContact(inner){
-    const ul = inner.querySelector("ul");
-    if (!ul) return;
-    const list = document.createElement("div"); list.className="clist";
-    ul.querySelectorAll("li").forEach(li => {
-      const strong = li.querySelector("strong");
-      const a = li.querySelector("a");
-      const lbl = strong ? strong.textContent : "";
-      const row = document.createElement(a ? "a" : "span");
-      if (a) row.href = a.getAttribute("href"); else row.className = "row";
-      const rest = a ? a.textContent : li.textContent.replace(/^[^·]*·\s*/,"");
-      row.innerHTML = `<span class="lbl">${lbl}</span><span>${rest}</span>`;
-      list.appendChild(row);
-    });
-    ul.replaceWith(list);
-  }
-
-  numberWork();
-
-  // external links new tab
-  doc.querySelectorAll('a[href^="http"]').forEach(a => { a.target="_blank"; a.rel="noopener"; });
-
-  // nav: smooth scroll
-  function goto(key){
-    if (key==="top") { window.scrollTo({top:0,behavior:"smooth"}); return; }
-    const el = document.getElementById(key);
-    if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
-  }
-  document.querySelectorAll("[data-go]").forEach(el =>
-    el.addEventListener("click", e => { e.preventDefault(); goto(el.dataset.go); }));
-
-  // scrollspy on masthead nav
-  const navKeys = ["about","work","frameworks","reading"];
-  const navEls = {}; document.querySelectorAll(".mast-nav a[data-go]").forEach(a => navEls[a.dataset.go]=a);
-  function spy(){
-    let cur = null;
-    navKeys.forEach(k => { const s=document.getElementById(k); if (s && s.getBoundingClientRect().top <= 160) cur=k; });
-    Object.values(navEls).forEach(a => a.classList.remove("on"));
-    if (cur && navEls[cur]) navEls[cur].classList.add("on");
-  }
-  window.addEventListener("scroll", spy, {passive:true}); spy();
-
-  // deep-link: scroll to #section on load (sections are built by JS, so do it after build)
-  if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) setTimeout(() => t.scrollIntoView(), 60); }
-</script>
-</body>
+    <script src="./app.js"></script>
+  </body>
 </html>
