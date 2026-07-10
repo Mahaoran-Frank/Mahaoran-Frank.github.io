@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ page.title | default: site.title | escape }}</title>
+    <title>{{ page.title | default: site.title | escape }} · Frank Ma</title>
     <meta
       name="description"
       content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 | escape }}"
@@ -12,36 +12,26 @@
     <link rel="stylesheet" href="{{ '/output.css' | relative_url }}" />
   </head>
   <body class="output-page">
-    <header class="output-nav">
-      <a class="output-brand" href="{{ '/' | relative_url }}">Frank Ma</a>
-      <nav aria-label="页面导航">
-        <a href="{{ '/' | relative_url }}">首页</a>
-        <a href="https://github.com/Mahaoran-Frank" target="_blank" rel="noreferrer">GitHub</a>
-      </nav>
-    </header>
-
     <main class="output-shell">
-      <article class="output-article">
-        <header class="output-title-block">
-          <p class="output-label">PUBLIC OUTPUT</p>
-          <h1>{{ page.title | default: "Untitled" | escape }}</h1>
-          {% if page.description %}
-            <p class="output-description">{{ page.description }}</p>
-          {% endif %}
-          {% if page.date %}
-            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-          {% endif %}
-        </header>
+      <nav class="output-back" aria-label="返回导航">
+        <a href="{{ '/outputs/' | relative_url }}"><span aria-hidden="true">↖</span> 公开输出</a>
+      </nav>
 
-        <div class="output-content">
-          {{ content }}
-        </div>
+      <header class="output-title-block">
+        <h1>{{ page.title | default: "Untitled" | escape }}</h1>
+        {% if page.date %}
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%-m月%-d日" }}</time>
+        {% endif %}
+      </header>
+
+      <article class="output-content">
+        {{ content }}
       </article>
-    </main>
 
-    <footer class="output-footer">
-      <a href="{{ '/' | relative_url }}">返回 Frank 的个人主页</a>
-    </footer>
+      <footer class="output-footer">
+        <a href="{{ '/' | relative_url }}">Frank Ma</a>
+        <span>{{ site.time | date: "%Y" }}</span>
+      </footer>
+    </main>
   </body>
 </html>
-

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title | default: "公开输出" | escape }} · Frank Ma</title>
+    <meta
+      name="description"
+      content="{{ page.description | default: 'Frank Ma 的公开文章、项目与阶段性思考。' | escape }}"
+    />
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
+    <link rel="stylesheet" href="{{ '/output.css' | relative_url }}" />
+  </head>
+  <body class="output-index-page">
+    <main class="output-index-shell">
+      <header class="output-index-intro">
+        <h1>Frank Ma</h1>
+        <p>我在搭一套让 AI 读懂长期个人上下文的知识系统。</p>
+        <p>这里记录我在 AI 产品、Agent、知识系统和产业落地上的公开输出。</p>
+      </header>
+
+      <div class="output-index-grid">
+        <section>
+          <h2>Building</h2>
+          <div class="output-index-item">
+            <a href="{{ '/outputs/' | relative_url }}">公开输出</a>
+            <p>把 Obsidian 中经过选择的内容，变成可以持续积累的公开网页。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Projects</h2>
+          <div class="output-index-item">
+            <a href="https://github.com/Mahaoran-Frank/obsidian-claude-pkm" target="_blank" rel="noreferrer">Frank Knowledge System <span aria-hidden="true">↗</span></a>
+            <p>基于 Obsidian 和 Agent 的个人知识系统。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Writing</h2>
+          {% assign output_pages = site.pages | sort: "date" | reverse %}
+          {% assign output_count = 0 %}
+          {% for item in output_pages %}
+            {% if item.url contains '/outputs/' and item.url != page.url and item.title %}
+              {% assign output_count = output_count | plus: 1 %}
+              <div class="output-index-item">
+                <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+                {% if item.description %}<p>{{ item.description }}</p>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+          {% if output_count == 0 %}
+            <div class="output-index-item">
+              <span>第一篇文章正在发布</span>
+              <p>内容上线后会自动出现在这里。</p>
+            </div>
+          {% endif %}
+        </section>
+      </div>
+
+      <section class="output-index-section">
+        <h2>Now</h2>
+        <p>正在把 Obsidian 里的公开输出接到个人网站，让写作、项目和长期思考拥有稳定的公开入口。</p>
+      </section>
+
+      <section class="output-index-section">
+        <h2>Connect</h2>
+        <p>回到<a href="{{ '/' | relative_url }}">个人主页</a>，或在 <a href="https://github.com/Mahaoran-Frank" target="_blank" rel="noreferrer">GitHub</a> 查看我的项目。</p>
+      </section>
+
+      <footer class="output-index-footer">
+        <a href="{{ '/' | relative_url }}">Frank Ma</a>
+        <span>{{ site.time | date: "%Y" }}</span>
+      </footer>
+    </main>
+  </body>
+</html>
