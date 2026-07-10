@@ -316,15 +316,15 @@ blockquote {
 
 @media (prefers-reduced-motion: no-preference) {
   .sky-panorama img {
-    animation: cloud-panorama 32s ease-in-out infinite alternate;
+    animation: cloud-panorama 16s ease-in-out infinite alternate;
   }
 
   .cloud-veil-one {
-    animation: cloud-veil-one 20s ease-in-out infinite alternate;
+    animation: cloud-veil-one 10s ease-in-out infinite alternate;
   }
 
   .cloud-veil-two {
-    animation: cloud-veil-two 24s ease-in-out infinite alternate;
+    animation: cloud-veil-two 12s ease-in-out infinite alternate;
   }
 }
 
