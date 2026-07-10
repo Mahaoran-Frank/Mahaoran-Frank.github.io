@@ -1,0 +1,20 @@
+title: Frank Ma
+url: https://mahaoran-frank.github.io
+baseurl: ""
+markdown: kramdown
+permalink: pretty
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+defaults:
+  - scope:
+      path: outputs
+      type: pages
+    values:
+      layout: output
+
+exclude:
+  - README.md
+
