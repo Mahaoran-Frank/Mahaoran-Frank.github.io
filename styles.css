@@ -72,6 +72,18 @@ body {
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 8px 26px rgba(23, 55, 83, 0.16);
   font-size: 13px;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.top-links.content-mode {
+  color: var(--sky-top);
+  border-color: rgba(47, 112, 184, 0.24);
+  background: rgba(251, 250, 243, 0.9);
+  box-shadow: 0 8px 26px rgba(47, 112, 184, 0.14);
 }
 
 .top-links a {
@@ -92,8 +104,29 @@ body {
   outline: none;
 }
 
+.top-links.content-mode a:hover,
+.top-links.content-mode a:focus-visible {
+  color: #245f9e;
+  background: rgba(255, 255, 255, 0.76);
+}
+
 .top-links a:active {
   transform: translateY(1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .top-links.content-mode {
+    color: #9ec9ee;
+    border-color: rgba(158, 201, 238, 0.26);
+    background: rgba(17, 24, 21, 0.88);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.24);
+  }
+
+  .top-links.content-mode a:hover,
+  .top-links.content-mode a:focus-visible {
+    color: #c6e1f7;
+    background: rgba(255, 255, 255, 0.08);
+  }
 }
 
 .hero {
