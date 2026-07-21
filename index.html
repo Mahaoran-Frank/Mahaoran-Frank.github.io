@@ -8,7 +8,7 @@
       name="description"
       content="Frank Ma 的个人主页。一位终身学习者，在自由市场中进行创造性表达。"
     />
-    <link rel="stylesheet" href="./styles.css?v=story-1" />
+    <link rel="stylesheet" href="./styles.css?v=story-2" />
   </head>
   <body>
     <header class="top-links" aria-label="个人链接">
@@ -32,31 +32,39 @@
     </section>
 
     <main class="story-page">
-      <section class="story reveal" aria-label="关于 Frank">
+      <section class="story reveal" id="story" aria-label="关于 Frank">
         <p class="story-opening">我是一个“感冒不吃感冒药，但发烧到头疼会直接吃退烧药”的人。</p>
 
-        <p>
-          我会去认真研究“感冒药为什么其实没用”：它治不好感冒，只是让你没那么难受，所以我宁可扛着，让身体自己去打。这是我讲逻辑、认死理的一面。
-        </p>
+        <div class="story-body">
+          <p>
+            我会去认真研究“感冒药为什么其实没用”：它治不好感冒，只是让你没那么难受，所以我宁可扛着，让身体自己去打。这是我讲逻辑、认死理的一面。
+          </p>
 
-        <p>
-          可当我发烧、头开始疼的时候，我会直接吃退烧药，<strong>不去看温度计</strong>。小时候我说我发烧了，我妈总先问：“量体温了吗？”她信的是那个数字；而我信的是我自己头疼的那个感觉。到没到 38.5°C 不重要，我的身体已经告诉我它越了线。
-        </p>
+          <p>
+            可当我发烧、头开始疼的时候，我会直接吃退烧药，<strong>不去看温度计</strong>。小时候我说我发烧了，我妈总先问：“量体温了吗？”她信的是那个数字；而我信的是我自己头疼的那个感觉。到没到 38.5°C 不重要，我的身体已经告诉我它越了线。
+          </p>
 
-        <p>
-          我后来发现自己一直是这样：一边较真到底、非要搞懂事情为什么成立，一边又最终相信自己的直接感受，而不是一个客观标准给出的读数。
-        </p>
+          <p class="story-closing">
+            我后来发现自己一直是这样：一边较真到底、非要搞懂事情为什么成立，一边又最终相信自己的直接感受，而不是一个客观标准给出的读数。
+          </p>
+        </div>
       </section>
 
-      <footer class="footer reveal" aria-label="联系方式">
+      <footer class="footer reveal" id="contact" aria-label="联系方式">
         <p>Frank Ma</p>
         <nav class="footer-links" aria-label="联系 Frank">
-          <a href="mailto:mhr20011020@gmail.com" aria-label="发送邮件给 Frank">Email</a>
-          <a href="https://github.com/Mahaoran-Frank" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="mailto:mhr20011020@gmail.com" aria-label="发送邮件给 Frank">
+            <span>Email</span>
+            <span class="contact-address">mhr20011020@gmail.com</span>
+          </a>
+          <a href="https://github.com/Mahaoran-Frank" target="_blank" rel="noreferrer">
+            <span>GitHub</span>
+            <span class="contact-address">github.com/Mahaoran-Frank</span>
+          </a>
         </nav>
       </footer>
     </main>
 
-    <script src="./app.js?v=story-1"></script>
+    <script src="./app.js?v=story-2"></script>
   </body>
 </html>
