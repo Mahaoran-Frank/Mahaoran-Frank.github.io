@@ -6,9 +6,9 @@
     <title>Hello, this is Frank</title>
     <meta
       name="description"
-      content="Frank Ma 的个人首页原型，关于个人知识系统、AI 行为设计、经济学阅读和产业 AI 落地。"
+      content="Frank Ma 的个人主页。一位终身学习者，在自由市场中进行创造性表达。"
     />
-    <link rel="stylesheet" href="./styles.css?v=nav-tone-1" />
+    <link rel="stylesheet" href="./styles.css?v=story-1" />
   </head>
   <body>
     <header class="top-links" aria-label="个人链接">
@@ -27,101 +27,36 @@
           Hello,<br />
           this is Frank.
         </h1>
-        <p>Learner, Builder, AI PM in progress.</p>
+        <p>A lifelong learner making creative expression in a free market.</p>
       </div>
     </section>
 
-    <main class="journal">
-      <section class="intro reveal">
+    <main class="story-page">
+      <section class="story reveal" aria-label="关于 Frank">
+        <p class="story-opening">我是一个“感冒不吃感冒药，但发烧到头疼会直接吃退烧药”的人。</p>
+
         <p>
-          我在搭一套让 AI 读懂个人上下文的知识系统。
+          我会去认真研究“感冒药为什么其实没用”：它治不好感冒，只是让你没那么难受，所以我宁可扛着，让身体自己去打。这是我讲逻辑、认死理的一面。
         </p>
+
         <p>
-          不是为了让 AI 替我思考，而是为了更清醒地学习、判断和行动。
+          可当我发烧、头开始疼的时候，我会直接吃退烧药，<strong>不去看温度计</strong>。小时候我说我发烧了，我妈总先问：“量体温了吗？”她信的是那个数字；而我信的是我自己头疼的那个感觉。到没到 38.5°C 不重要，我的身体已经告诉我它越了线。
         </p>
+
         <p>
-          我习惯先把问题拆开：一个判断从哪里来，边界在哪里，能不能落到现实里。
-          这些问题比一个漂亮结论更吸引我。
+          我后来发现自己一直是这样：一边较真到底、非要搞懂事情为什么成立，一边又最终相信自己的直接感受，而不是一个客观标准给出的读数。
         </p>
       </section>
 
-      <section class="entry reveal">
-        <p class="entry-label">系统 · SYSTEM</p>
-        <h2>Frank Knowledge System</h2>
-        <p>
-          这是一个基于 Obsidian + Agent 的个人知识系统。
-        </p>
-        <p>
-          它不是简单的笔记库，而是我用来管理学习、计划断点和 AI 协作上下文的工作流。
-          我希望 AI 不是每次都从零认识我，而是能基于我的知识、计划状态和协作规则继续工作。
-        </p>
-      </section>
-
-      <div class="divider" aria-hidden="true"></div>
-
-      <section class="entry reveal">
-        <p class="entry-label">提示 · PROMPT</p>
-        <h2>System Prompt 学习与拆解</h2>
-        <p>
-          我在研究 AI 的行为是怎么被设计出来的。
-        </p>
-        <p>
-          一个好的 system prompt 不只是“写几条规则”，而是要定义角色、处境、边界、工具和失败处理方式。
-          我关心的是：怎样让 AI 稳定地做对事，而不是偶尔给出一个漂亮答案。
-        </p>
-      </section>
-
-      <div class="divider" aria-hidden="true"></div>
-
-      <section class="entry reveal reading-entry">
-        <p class="entry-label">阅读 · READING</p>
-        <h2>《小岛经济学》阅读线</h2>
-        <p>
-          我用《小岛经济学》补经济学底层直觉。
-        </p>
-        <p>
-          资本、储蓄、信贷、生产、利率这些词，只有放回一个简单故事里，才会真正长出感觉。
-          我读书不是为了收集结论，而是为了追问：这个解释成立吗？边界在哪里？它能不能解释现实？
-        </p>
-        <blockquote>
-          增长的起点不是更卖力地抓鱼，而是停下来、饿一天、去造工具。
-        </blockquote>
-      </section>
-
-      <div class="divider" aria-hidden="true"></div>
-
-      <section class="entry reveal">
-        <p class="entry-label">产业 · INDUSTRY</p>
-        <h2>神东采掘规划智能体</h2>
-        <p>
-          这是一个真实产业场景里的 AI 落地问题。
-        </p>
-        <p>
-          它让我看到，AI 不是只负责生成答案，而要接住业务约束、优化模型、风险解释和专家裁决。
-          真正难的地方不是文本生成，而是让 AI 进入复杂业务里的责任链。
-        </p>
-      </section>
-
-      <div class="divider" aria-hidden="true"></div>
-
-      <section class="entry reveal direction">
-        <p class="entry-label">方向 · DIRECTION</p>
-        <h2>eval 驱动的 AI 落地 PM</h2>
-        <p>
-          这里的 eval 不是简单测试，而是定义什么叫好。
-        </p>
-        <p>
-          在真实业务场景里，AI 的回答、建议或行动到底算不算对，需要有人把模糊的质量拆成可以判断的标准。
-          我想成为做这件事的人：理解业务，理解 AI，也能把两边的“好”对齐。
-        </p>
-      </section>
-
-      <footer class="footer reveal">
+      <footer class="footer reveal" aria-label="联系方式">
         <p>Frank Ma</p>
-        <p>2026</p>
+        <nav class="footer-links" aria-label="联系 Frank">
+          <a href="mailto:mhr20011020@gmail.com" aria-label="发送邮件给 Frank">Email</a>
+          <a href="https://github.com/Mahaoran-Frank" target="_blank" rel="noreferrer">GitHub</a>
+        </nav>
       </footer>
     </main>
 
-    <script src="./app.js?v=nav-tone-1"></script>
+    <script src="./app.js?v=story-1"></script>
   </body>
 </html>
