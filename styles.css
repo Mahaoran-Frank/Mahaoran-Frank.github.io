@@ -212,7 +212,7 @@ body {
 .hero-inner {
   position: relative;
   z-index: 3;
-  width: min(780px, calc(100% - 44px));
+  width: min(1060px, calc(100% - 64px));
   transform: translateY(3vh);
 }
 
@@ -231,22 +231,24 @@ body {
 
 .hero p {
   margin: 28px 0 0;
-  max-width: 660px;
+  width: max-content;
+  max-width: 100%;
   color: rgba(255, 255, 255, 0.9);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(18px, 2vw, 26px);
+  font-size: clamp(18px, 1.8vw, 25px);
   font-style: italic;
   line-height: 1.35;
   letter-spacing: 0;
+  white-space: nowrap;
   padding-bottom: 4px;
   text-shadow: 0 2px 14px rgba(21, 70, 111, 0.3);
 }
 
 .story-page {
   position: relative;
-  max-width: 880px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 clamp(28px, 5vw, 64px);
 }
 
 .story {
@@ -254,28 +256,49 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(96px, 14vh, 160px) 0;
+  padding: clamp(104px, 14vh, 168px) 0;
 }
 
 .story p {
-  max-width: 720px;
-  margin: 0 0 clamp(26px, 4vh, 42px);
+  margin: 0;
   color: var(--ink);
-  font-family: Georgia, "Times New Roman", "Songti SC", serif;
-  font-size: clamp(18px, 1.75vw, 22px);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Noto Sans CJK SC",
+    "Microsoft YaHei",
+    sans-serif;
+  font-size: clamp(18px, 1.55vw, 20px);
   font-weight: 400;
-  line-height: 1.95;
-  letter-spacing: 0.015em;
-}
-
-.story p:last-child {
-  margin-bottom: 0;
+  line-height: 2;
+  letter-spacing: 0.01em;
 }
 
 .story .story-opening {
-  max-width: 780px;
-  font-size: clamp(23px, 2.5vw, 32px);
-  line-height: 1.75;
+  max-width: 23em;
+  margin-bottom: clamp(64px, 10vh, 112px);
+  font-family: Georgia, "Times New Roman", "Songti SC", serif;
+  font-size: clamp(28px, 3.25vw, 42px);
+  line-height: 1.62;
+  letter-spacing: 0;
+}
+
+.story-body {
+  width: min(100%, 690px);
+  margin-left: auto;
+}
+
+.story-body p + p {
+  margin-top: clamp(28px, 4vh, 42px);
+}
+
+.story-body .story-closing {
+  margin-top: clamp(48px, 7vh, 72px);
+  padding-top: clamp(28px, 4vh, 40px);
+  border-top: 1px solid var(--line);
+  font-weight: 550;
 }
 
 .story strong {
@@ -288,13 +311,12 @@ body {
 .footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px;
-  min-height: 34dvh;
-  padding: 72px 0 48px;
+  align-items: flex-start;
+  gap: 48px;
+  min-height: 40dvh;
+  padding: 64px 0 48px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-family: Georgia, "Times New Roman", serif;
   font-size: 14px;
 }
 
@@ -303,22 +325,37 @@ body {
 }
 
 .footer-links {
-  display: flex;
-  gap: clamp(24px, 4vw, 44px);
+  display: grid;
+  width: min(100%, 520px);
+  gap: 18px;
 }
 
 .footer a {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 20px;
   color: inherit;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.28em;
-  transition: color 180ms ease, text-decoration-color 180ms ease;
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.footer .contact-address {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 0.3em;
 }
 
 .footer a:hover,
 .footer a:focus-visible {
   color: var(--ink);
-  text-decoration-color: currentColor;
+  transform: translateX(3px);
   outline: none;
+}
+
+.footer a:hover .contact-address,
+.footer a:focus-visible .contact-address {
+  text-decoration-color: currentColor;
 }
 
 .reveal {
@@ -328,6 +365,11 @@ body {
 }
 
 .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal:target {
   opacity: 1;
   transform: translateY(0);
 }
@@ -390,6 +432,7 @@ body {
   }
 
   .hero-inner {
+    width: min(100% - 44px, 780px);
     transform: translateY(1vh);
   }
 
@@ -398,9 +441,11 @@ body {
   }
 
   .hero p {
-    max-width: 330px;
+    width: auto;
+    max-width: 520px;
     font-size: 16px;
     line-height: 1.4;
+    white-space: normal;
   }
 
   .cloud-veil {
@@ -421,18 +466,22 @@ body {
   }
 
   .story p {
-    margin-bottom: 26px;
     font-size: 18px;
-    line-height: 1.85;
+    line-height: 1.9;
   }
 
   .story .story-opening {
-    font-size: 23px;
-    line-height: 1.7;
+    margin-bottom: 56px;
+    font-size: 27px;
+    line-height: 1.65;
+  }
+
+  .story-body {
+    margin-left: 0;
   }
 
   .footer {
-    min-height: 28dvh;
+    min-height: 34dvh;
     padding: 54px 0 28px;
   }
 }
@@ -444,12 +493,25 @@ body {
   }
 
   .story .story-opening {
-    font-size: 21px;
+    font-size: 25px;
   }
 
   .footer {
-    align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    gap: 36px;
+  }
+
+  .footer-links {
+    gap: 22px;
+  }
+
+  .footer a {
+    grid-template-columns: 60px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .footer .contact-address {
+    overflow-wrap: anywhere;
   }
 }
